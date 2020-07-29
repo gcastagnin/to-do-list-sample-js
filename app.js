@@ -1,26 +1,26 @@
 
 let guardarTarea = function(){
+	
+	let textoTarea = document.querySelectorAll("#textoTarea")
+	textoTarea = textoTarea[0]
+	
+	if (textoTarea.value == ""){
+		alert("Tarea vacía!")
+		return
+	}
+
 
 	let estado = document.querySelectorAll('#guardarTarea')
 	estado = estado[0]
+
 	if (estado.innerText == "Guardar tarea"){
+		
 		let tareaId = generarId()
-		let textoTarea = document.querySelectorAll("#textoTarea")
-		textoTarea = textoTarea[0]
-		if (textoTarea.value == ""){
-			alert("Tarea vacía!")
-			return
-		}
+		
+
 		let vuelta = ingresarTextoTarea(tareaId, textoTarea.value)
 	}
 	else {
-		console.log("Editar")
-		let textoTarea = document.querySelectorAll("#textoTarea")
-		textoTarea = textoTarea[0]
-		if (textoTarea.value == ""){
-			alert("Tarea vacía!")
-			return
-		}
 
 		let noVisible = document.querySelectorAll("#recId")
 		noVisible = noVisible[0]
@@ -31,7 +31,20 @@ let guardarTarea = function(){
 		let textoBoton = document.querySelectorAll("#guardarTarea")
 		textoBoton = textoBoton[0]
 		textoBoton.innerText = "Guardar tarea"
+
+		let botonesBorrar = document.querySelectorAll(".borrarBoton")
+		let botonesEditar = document.querySelectorAll(".editarBoton")
+		
+		for (var i = botonesBorrar.length - 1; i >= 0; i--) {
+			botonesBorrar[i].disabled = false
+		}
+
+		 for (var i = botonesEditar.length - 1; i >= 0; i--) {
+			botonesEditar[i].disabled = false
+		}
 	}
+
+	textoTarea.value = ""
 }
 
 
@@ -80,7 +93,7 @@ let ingresarTextoTarea = function (tareaId, textoTarea) {
 				<span class="resaltado">${textoTarea}</span>
 					<ul>
 						<li>
-							<button type="button" onclick="editarTarea('${tareaId}')">Editar tarea</button> <button type="button" onclick="eliminarTarea('${tareaId}')">Eliminar tarea</button>
+							<button type="button" class="editarBoton" onclick="editarTarea('${tareaId}')">Editar tarea</button> <button type="button" class="borrarBoton" onclick="eliminarTarea('${tareaId}')">Eliminar tarea</button>
 						</li>
 					</ul>
 				</li><br id="br${tareaId}">`
@@ -89,13 +102,14 @@ let ingresarTextoTarea = function (tareaId, textoTarea) {
 
 
 let editarTextoTarea = function(tareaId, textoTarea) {
+
 	let tarea = document.querySelectorAll("#" + tareaId)
 	tarea = tarea[0]
 	template = `<li id="${tareaId}">
 				<span class="resaltado">${textoTarea}</span>
 					<ul>
 						<li>
-							<button type="button" onclick="editarTarea('${tareaId}')">Editar tarea</button> <button type="button" onclick="eliminarTarea('${tareaId}')">Eliminar tarea</button>
+							<button type="button" class="editarBoton" onclick="editarTarea('${tareaId}')">Editar tarea</button> <button type="button" class="borrarBoton" onclick="eliminarTarea('${tareaId}')">Eliminar tarea</button>
 						</li>
 					</ul>
 				</li>`
@@ -115,6 +129,18 @@ let eliminarTarea = function(tareaId){
 
 
 let editarTarea = function(tareaId){
+
+	let botonesBorrar = document.querySelectorAll(".borrarBoton")
+	let botonesEditar = document.querySelectorAll(".editarBoton")
+	
+	for (var i = botonesBorrar.length - 1; i >= 0; i--) {
+		botonesBorrar[i].disabled = true
+	}
+
+	 for (var i = botonesEditar.length - 1; i >= 0; i--) {
+		botonesEditar[i].disabled = true
+	}
+
 	let tarea = document.querySelectorAll("#" + tareaId)
 	tarea = tarea[0]
 	
