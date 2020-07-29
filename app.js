@@ -1,4 +1,7 @@
 
+let idEditando = ""
+
+
 let guardarTarea = function(){
 	
 	let textoTarea = document.querySelectorAll("#textoTarea")
@@ -22,11 +25,8 @@ let guardarTarea = function(){
 	}
 	else {
 
-		let noVisible = document.querySelectorAll("#recId")
-		noVisible = noVisible[0]
 
-
-		let vuelta = editarTextoTarea(noVisible.innerText, textoTarea.value)
+		let vuelta = editarTextoTarea(idEditando, textoTarea.value)
 
 		let textoBoton = document.querySelectorAll("#guardarTarea")
 		textoBoton = textoBoton[0]
@@ -147,9 +147,7 @@ let editarTarea = function(tareaId){
 	let textoAEditar = document.querySelectorAll("#textoTarea")
 	textoAEditar = textoAEditar[0]
 
-	let noVisible = document.querySelectorAll("#recId")
-	noVisible = noVisible[0]
-	noVisible.innerText = tareaId
+	idEditando = tareaId
 
 	let textoBoton = document.querySelectorAll("#guardarTarea")
 	textoBoton = textoBoton[0]
